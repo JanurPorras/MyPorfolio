@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track My Location</title>
+    <script>
+        function trackLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+
+                        // Display the location
+                        alert(`Your location: Latitude = ${lat}, Longitude = ${lon}`);
+
+                        // Send to server (optional)
+                        // Uncomment the below lines if you have a server endpoint
+                        /*
+                        fetch('https://your-server-endpoint.com/location', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ latitude: lat, longitude: lon }),
+                        }).then(response => response.json())
+                          .then(data => console.log('Location sent successfully:', data))
+                          .catch(error => console.error('Error sending location:', error));
+                        */
+                    },
+                    (error) => {
+                        alert("Unable to retrieve your location. Error: " + error.message);
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Track My Location</h1>
+    <a href="#" onclick="trackLocation()">Click here to track your location</a>
+</body>
+</html>
